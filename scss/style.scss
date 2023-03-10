@@ -1,219 +1,146 @@
-@import 'reset';
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@900&display=swap');
+@charset "utf-8";
 
-$wid:27vw;
-$ht:75vh;
-$gap:3px;
-$innerGap:15;
-$bg:#ddd;
+* {
+  margin: 0px; 
+  padding: 0px; 
+  box-sizing: border-box;
+}
+ul,
+ol,
+li
+{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
 
 
-header {
+/* 
+부모 태그에 적용하는 속성 
+
+display
+flex-direction
+frex-wrap
+flex-flow =(flex-direction, flex-wrap)
+justyfy-content
+align-items
+aline-content
+
+자식요소에 적용하는 속성
+order
+flex-grow
+flex-shrink
+flex(basics)
+align-self
+display-
+flex
+: 자신은  블록 속성을 유지하고 자식 요소에 flex환경을 설정 한다 
+inline-flex
+:자신은 인라인 속성을 유지하고 자식 요소에 flex환경을 설정 한다 
+
+flex-direction
+-자식 요소의 정렬 방향을 변경
+row - 기본축이 가로로 정렬(기본값) 왼족에서 오른쪽
+column - 기본축이 세로로 정렬위에서 아래로 
+row-reverse -가로로 정렬하는데 오른쪽에서 왼쪽 
+column-reverse - 세로로 정렬하는데 아래서 위로 
+
+flex-wrap
+자식 요소에 줄 바꿈을 허용할지 말지를 결정 
+nowrap -기본값으로 자식 요소의 줄바꿈이 안됨 
+wrap - 줄바꿈을 허용하고 기본값(row)에서는 좌상으로 부터 우하 방향 
+wrap-reverse 줄바꿈을 허용하는데 역순으로 정렬 
+
+
+flex-flow
+wrap 과  direction 을 한번에 지정 
+flex-flow column wrap;
+
+justify-content 아이템을 어떻게 정렬할것인가? (중심축을 기준으로)
+flex-srart : 자식 요소를 시작 방향으로 정렬 (기본값)
+flex-end : 자식 요소를 종료 방향으로 정렬 (역순이 아니라 종료 방향의 끝으로 정렬 하는것) - 아이템의 순서는 유지하되 정렬 방향만 달라진다 
+center : 가운데 정렬 
+space-between : 자식 요소 사이에만 균일한 간격 ( 양끝단에 하나씩 위치시키고 중간에 아이템들은 같은 넓이 공간 만큼 벌려서 정렬)
+space-around : 자식 요소 둘레에 균일한 간격을 주면서 정렬 (양끝단에도 공간이 생김, 사이에는 2개의 공간이 겹쳐서 넓게 벌려짐)
+space-evenly : 자식 요소 사이와 양끝에 균일한 간격 
+
+align-items (교차축 위의 아이템들은 어떤 식으로 정렬할 것인가)
+baseline :자식 요소 중에 하나가 패딩이나 마진 등으로 너비가 달라져서 안에 있는 글자가 
+center : 가운데 정렬 
+
+aline-content (justify의 동일한 속성을 반대축에 사용하는 속성)
+이곳에서 space-#### 을 지정할수 있다 
+---------------------------- 여기까지 부모 속성 
+aline-self : 아이템중에 하나를 따로 정해서 속성을 부여할때 
+
+*/
+main {
   width: 100%;
-  position: absolute;
-  padding: 5vh 10vw;
-  top: 0;
-  left: 0;
-  z-index: flex;
-  justify-content: space-between;
-
-  h1 a {
-    font: bold 24px/1 'arial';
-    color: #111;
-  }
-
-  #gnb {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-
-    a {
-      font: bold 14px/1 'arial';
-      color: #555;
-    }
-  }
-  .btnRegister {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
-    height: 40px;
-    border: 1px solid #555;
-    border-radius: 20px;
-    font: bold 14px/1 'arial';
-    color: #555;
-  }
-}
-
-figure {
-  #visual {
+	height: 100vh;
+	background-color: lightcyan;
+  
+  .wrap {
     width: 100%;
-    height: 100vh;
-    background: $bg;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    padding: 10vw;
+    height: 100%;
+    border: 5px solid blue;
+
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-content: center;
+    /* // flex-flow: column wrap; */
+    /* flex-direction:row;
+      기본축을 정하는 코드  
+      flex-wrap:wrap; */
+    justify-content:center;
+    align-items:center;
 
-    .txtBox {
-      width: 48%;
-      display: flex;
-      flex-wrap: wrap;
-      align-content: center;
-      gap: 40px;
-      position: relative;
-      z-index: 3;
+    article {
+      width: 200px;
+      height: 100px;
+      background-color: aqua;
+      border: 1px solid #000;
 
-      >* {
-        width: 100%;
+      /*
+      flex-grow 
+      -요소 안쪽 여백 늘리기 : 전체 부모 영역을 채우려고 늘어 놓는것 
+      주지 않으면 원래의 크기로 유지 하다 줄어 들어서 브라우저가 좁아 지면 그때서야 줄어듦
+
+      자식들에게 값 1을 주면 골고루 부모 요소를 채움
+      숫자가 달라질수록 비율을 나눠 가진다 
+
+      flex-shrink 
+      요소 안쪽 여백 줄이기 
+      부모들의 사이즈가 달라질때 줄어드는 비율을 정하는것 
+
+      flex-basics
+      flexbox 기본 크기를 설정한다 
+      glow, shrink  값이 없다면 기본적인 값을 지정한다 
+      기본값은 auto
+      %로 지정 가능 하다 
+      */
+      
+      &:nth-of-type(1) {
+        order: 5;
+        flex-basis: 10%;
       }
-      >span {
-        display: flex;
-        align-items:center;
-        gap: 15px; 
-        font: 12px/1 'arial';
-
-        &::before {
-          content: '';
-          width: 30px;
-          height: 1px;
-          background: #333;
-        }
+      &:nth-of-type(2) {
+        order: 2;
+        // flex-grow: 3;
+        // flex-shrink: 2;
+        flex-basis: 20%;
       }
-      h1 {
-        font: nomal 5vw/1 'heebo';
-        color: #111;
-
-        &::after {
-          content: '+';
-          display: inline-flex;
-          justify-content: center;
-          align-items: center;
-          width: 2.5vw;
-          height: 2.5vw;
-          background: #90ffed;
-          border-radius: 50%;
-          font-size: 20px;
-          color: #fff;
-          margin-left: 50px;
-          transform: translateY(-15px);
-        }
-        .con {
-          width: calc($wid - $gap * $innerGap);
-          height: calc($ht - $gap * $innerGap);
-          background: #111;
-          border-radius: calc(($wid - $gap * $innerGap) / 2);
-          position: relative;
-          z-index: 2;
-          overflow: hidden;
-          box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-        }
+      &:nth-of-type(3) {
+        order: 3;
+        flex-basis: 20%;
       }
-    }
-    .bg {
-      width: 100% ;
-      height: 100vh;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 1;
-      opacity: 0.12;
-      overflow: hidden;
-
-      .color1 {
-        width: 60vw;
-        height: 40vw;
-        background: linear-gradient(80deg, orange, hotpink);
-        position: absolute;
-        bottom: 5vh;
-        right: 0;
-        border-radius: 50%;
-        filter: blur(80px);
-        mix-blend-mode: overlay;
-        animation: move2 15s linear infinite;
+      &:nth-of-type(4) {
+        order: 4;
+        flex-basis: 10%;
       }
-      .color2 {
-        width: 50vw;
-        height: 40vw;
-        background: linear-gradient(80deg, aqua,red);
-        border-radius: 50%;
-        mix-blend-mode: overlay;
-        position: absolute;
-        left: 0;
-        top: 2vh;
-        filter: blur(80px);
-        animation: move2 15s linear infinite;
-
+      &:nth-of-type(5) {
+        order: 1;
+        flex-basis: 40%;
+        align-items: flex-end;
       }
-    }
-    .outlined {
-      font: 15vw/1 'heebo';
-      color: transparent;
-      -webkit-text-stroke: 1px #fff;
-      position: absolute;
-      bottom: 7vh;
-      right: 5vw;
-      z-index: 3;
-    }
-  }
-}
-
-@keyframes ani {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes move1 {
-  0% {
-    right: -20%;
-    bottom: 20%;
-    transform: scale(1);
-  }
-  30% {
-    right: 90% ;
-    bottom: -20%;
-    transform: scale(1.2);
-  }
-  70% {
-    right: 30%;
-    bottom: 70%;
-    transform: scale(1);
-  }
-  100% {
-    right: -20%;
-    bottom: 20%;
-    transform: scale(1);
-  }
-}
-@keyframes move2 {
-  0% {
-    left : -20%;
-    top : 20%;
-  }
-  30% {
-    left : 70%;
-    top : -20%;
-  }
-  70% {
-    left : 30%;
-    top : 70%;
-  }
-  100% {
-    left : -20%;
-    top : 20%;
+    }         
   }
 }
